@@ -13,5 +13,13 @@ to configure following parameters:
 
 Database will be saved to the folder with redis source
 
+INSTALLATION
+
+  1. cd /etc/puppet/modules/ && git clone git://github.com/zen4ever/puppet-redis.git redis
+  2. Make sure that you have "path" for "exec" in your defaults, something like
+     Exec { path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" }
+     in the /etc/puppet/manifests/site.pp file.
+  3. Include redis class in your nodes where you want to have redis installed.
+
 Credits:
     init.d script was written by Ian Lewis (http://www.ianlewis.org/en/redis-initd-script)
