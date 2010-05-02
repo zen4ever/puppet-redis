@@ -1,6 +1,8 @@
 define redis_source(
     $version = 'v1.3.10',
-    $path = '/usr/src'
+    $path = '/usr/src',
+    $owner = 'redis',
+    $group = 'redis'
 ) {
     case $version {
         default: {
@@ -34,5 +36,22 @@ define redis_source(
     exec { "make ${version}":
          command => "cd ${path}/redis_${version} && make",
          creates => "${path}/redis_${version}/redis-server",
+    }
+    file { "${path}/redis_${version}":
+        ensure => directory,
+        owner => $owner,
+        group => $group,
+        recurse => true,
+    }
+    file { "/etc/init.d/redis-server":
+         content => template("redis/redis-server.erb"),
+         owner => root,
+         group => root,
+         mode => 744,
+    }
+    file { "/etc/redis.conf":
+        ensure => present,
+        content => template("redis/redis.conf.erb"),
+        replace => false;
     }
 }

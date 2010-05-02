@@ -1,17 +1,15 @@
 import "defines/*.pp"
 
 class redis {
+    user { "redis":
+        ensure => present,
+    }
     redis_source {
         git: 
             version => "source",
             path => "/usr/src",
+            owner => "redis",
+            group => "redis",
+            require => User["redis"],
     }
-    file { "/etc/redis.conf":
-        ensure => present,
-        source => "puppet:///modules/redis/redis.conf",
-        replace => false;
-    }
-
 }
-#Exec { path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" }
-#include redis
