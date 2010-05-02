@@ -7,8 +7,11 @@ Config file goes to /etc/redis.conf
 Contains definition redis_source, which allows you
 to configure following parameters:
 
-   $version - version of the redis you want to install
-   $path - path where you want to install it
-   $owner/$group - user/group under which redis process would be running.
+    $version - version of the redis you want to install
+    $path - path where you want to install it
+    $owner/$group - user/group under which redis process would be running.
 
 Database will be saved to the folder with redis source
+
+Credits:
+    init.d script was written by Ian Lewis (http://www.ianlewis.org/en/redis-initd-script)
