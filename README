@@ -11,7 +11,7 @@ to configure following parameters:
     $path - path where you want to install it
     $owner/$group - user/group under which redis process would be running.
 
-Database will be saved to the folder with redis source
+Database will be saved to /var/lib/redis 
 
 INSTALLATION
 
