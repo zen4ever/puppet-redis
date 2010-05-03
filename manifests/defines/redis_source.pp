@@ -40,8 +40,8 @@ define redis_source(
     file { db_folder:
         path => "/var/lib/redis",
         ensure => "directory",
-        owner => redis,
-        group => redis
+        owner => $owner,
+        group => $group,
     }
     file { "/etc/init.d/redis-server":
          content => template("redis/redis-server.erb"),
