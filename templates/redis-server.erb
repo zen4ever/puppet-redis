@@ -13,8 +13,8 @@
 
 
 PATH=/opt/redis/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=<%= path%>/redis_<%= version%>/redis-server
-REDIS_CLI=<%= path%>/redis_<%= version%>/redis-cli
+DAEMON=<%= bin%>/redis-server
+REDIS_CLI=<%= bin%>/redis-cli
 CONFIG_FILE=/etc/redis.conf
 DAEMON_ARGS="$CONFIG_FILE"
 NAME=redis-server

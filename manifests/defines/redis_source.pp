@@ -1,6 +1,7 @@
 define redis_source(
     $version = 'v1.3.10',
     $path = '/usr/local/src',
+    $bin = '/usr/local/bin',
     $owner = 'redis',
     $group = 'redis'
 ) {
@@ -34,8 +35,8 @@ define redis_source(
         }
     }
     exec { "make ${version}":
-         command => "cd ${path}/redis_${version} && make",
-         creates => "${path}/redis_${version}/redis-server",
+         command => "cd ${path}/redis_${version} && make && mv redis-server ${bin}/ && mv redis-cli ${bin}/ && mv redis-benchmark ${bin}/ && mv redis-check-dump ${bin}/",
+         creates => "${bin}/redis-server",
     }
     file { db_folder:
         path => "/var/lib/redis",
