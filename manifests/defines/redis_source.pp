@@ -35,7 +35,8 @@ define redis_source(
         }
     }
     exec { "make ${version}":
-         command => "cd ${path}/redis_${version} && make && mv redis-server ${bin}/ && mv redis-cli ${bin}/ && mv redis-benchmark ${bin}/ && mv redis-check-dump ${bin}/",
+         cwd => "${path}/redis_${version}",
+         command => "make && mv redis-server ${bin}/ && mv redis-cli ${bin}/ && mv redis-benchmark ${bin}/ && mv redis-check-dump ${bin}/",
          creates => "${bin}/redis-server",
     }
     file { db_folder:
