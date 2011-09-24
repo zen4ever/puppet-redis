@@ -1,8 +1,9 @@
 define redis_source(
-    $version = 'v2.0.4-stable',
+    $version = '2.2.14',
     $path = '/usr/local/src',
     $bin = '/usr/local/bin',
     $owner = 'redis',
+    $redis_timeout = "0",
     $group = 'redis'
 ) {
     case $version {
@@ -44,16 +45,23 @@ define redis_source(
         ensure => "directory",
         owner => $owner,
         group => $group,
+        require => Exec["make ${version}"],
     }
     file { "/etc/init.d/redis-server":
          content => template("redis/redis-server.erb"),
          owner => root,
          group => root,
          mode => 744,
+         require => [File["/etc/redis.conf"], File["db_folder"]],
+         notify => Service["redis-server"],
+    }
+    update_rc { "redis-server":
+        service => "redis-server"
     }
     file { "/etc/redis.conf":
         ensure => present,
         content => template("redis/redis.conf.erb"),
-        replace => false;
+        notify => Service["redis-server"];
     }
+    realize Service["redis-server"]
 }

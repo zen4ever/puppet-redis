@@ -4,10 +4,10 @@ class redis {
     user { "redis":
         ensure => present,
     }
-    redis_source {
-        git: 
-            owner => "redis",
-            group => "redis",
-            require => User["redis"],
+    @service { "redis-server":
+        ensure => running,
+        enable => true,
+        hasrestart => true,
+        require => File["/etc/init.d/redis-server"],
     }
 }

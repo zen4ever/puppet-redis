@@ -29,7 +29,7 @@ port 6379
 # bind 127.0.0.1
 
 # Close the connection after a client is idle for N seconds (0 to disable)
-timeout 300
+timeout <%= redis_timeout %>
 
 # Set server verbosity to 'debug'
 # it can be one of:
