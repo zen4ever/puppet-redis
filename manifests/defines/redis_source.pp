@@ -1,4 +1,4 @@
-define redis_source(
+define redis::source(
     $version = '2.2.14',
     $path = '/usr/local/src',
     $bin = '/usr/local/bin',
