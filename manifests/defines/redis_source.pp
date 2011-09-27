@@ -17,7 +17,7 @@ define redis::source(
              exec { redis_code: 
                   command =>"wget http://github.com/antirez/redis/tarball/${version} -O redis_${version}.tar.gz && tar --strip-components 1 -xzvf redis_${version}.tar.gz",
                   cwd => "${path}/redis_${version}",
-                  creates => "${path}/redis_${version}/redis.c",
+                  creates => "${path}/redis_${version}/src/redis.c",
                   require => File["redis_folder"],
                   before => Exec["make ${version}"]
              }
