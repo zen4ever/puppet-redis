@@ -55,9 +55,6 @@ define redis::source(
          require => [File["/etc/redis.conf"], File["db_folder"]],
          notify => Service["redis-server"],
     }
-    update_rc { "redis-server":
-        service => "redis-server"
-    }
     file { "/etc/redis.conf":
         ensure => present,
         content => template("redis/redis.conf.erb"),
